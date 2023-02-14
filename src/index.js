@@ -17,10 +17,11 @@ import UsersCommand from './commands/user.js';
 import ChannelsCommand from './commands/channel.js';
 import BanCommand from './commands/ban.js';
 import RegisterCommand from './commands/register.js';
+import badgeRegisterCommand from './commands/ping.js';
 
 config();
 
-const TOKEN = process.env.TUTORIAL_BOT_TOKEN;
+const TOKEN = process.env.TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
 
@@ -56,7 +57,12 @@ client.on('interactionCreate', (interaction) => {
       interaction.reply({
         components: [actionRowComponent.toJSON(), actionRowDrinkMenu.toJSON()],
       });
-    } else if (interaction.commandName === 'register') {
+    }
+    else if (interaction.commandName === 'badgeregistercommand'){
+      interaction.reply({content: 'beep boop wacht maar 24 uur',})
+    }
+    
+    else if (interaction.commandName === 'register') {
       const modal = new ModalBuilder()
         .setTitle('Register User Form')
         .setCustomId('registerUserModal')
@@ -108,6 +114,7 @@ async function main() {
     ChannelsCommand,
     BanCommand,
     RegisterCommand,
+    badgeRegisterCommand,
   ];
   try {
     console.log('Started refreshing application (/) commands.');
